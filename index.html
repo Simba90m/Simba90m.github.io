@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahmoud Abdelaziz | Data Analyst</title>
+<style>
+  :root {
+    --navy: #0B1F3F;
+    --teal: #0F9B8E;
+    --magenta: #D6006C;
+    --gray: #8C8C8C;
+    --bg: #F4F6F8;
+    --text: #2B2B2B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 70px 20px 60px;
+    text-align: center;
+  }
+  header h1 { font-size: 2.4rem; margin-bottom: 8px; }
+  header p.tagline { color: var(--teal); font-size: 1.15rem; font-weight: 600; margin-bottom: 18px; }
+  header p.blurb { max-width: 700px; margin: 0 auto 26px; color: #dfe6f0; }
+  .badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: 9px 18px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .badge.linkedin { background: #0A66C2; border-color: #0A66C2; }
+  .badge.github { background: #24292F; border-color: #24292F; }
+  .badge.tableau { background: #E97627; border-color: #E97627; }
+  .badge.email { background: var(--magenta); border-color: var(--magenta); }
+
+  nav {
+    background: #fff;
+    border-bottom: 1px solid #e2e6ea;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 14px 10px;
+    flex-wrap: wrap;
+  }
+  nav a { color: var(--navy); font-weight: 600; font-size: 0.95rem; }
+
+  section { max-width: 960px; margin: 0 auto; padding: 60px 24px; }
+  section h2 {
+    color: var(--navy);
+    font-size: 1.6rem;
+    margin-bottom: 26px;
+    border-bottom: 3px solid var(--teal);
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(11,31,63,0.08);
+  }
+  .stat-card .num { font-size: 1.9rem; font-weight: 700; color: var(--magenta); }
+  .stat-card .label { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
+
+  .toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .toolkit-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(11,31,63,0.06);
+  }
+  .toolkit-item h4 { color: var(--navy); font-size: 0.95rem; margin-bottom: 6px; }
+  .toolkit-item p { font-size: 0.88rem; color: var(--text); }
+
+  .project-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 10px rgba(11,31,63,0.08);
+    border-left: 5px solid var(--teal);
+  }
+  .project-card.inprogress { border-left-color: var(--magenta); }
+  .project-card h3 { color: var(--navy); font-size: 1.15rem; margin-bottom: 6px; }
+  .project-card .tools { color: var(--magenta); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; }
+  .project-card p.desc { margin-bottom: 12px; }
+  .project-card .links a { margin-right: 16px; font-weight: 600; font-size: 0.9rem; }
+  .tag {
+    display: inline-block;
+    background: var(--bg);
+    color: var(--navy);
+    border: 1px solid #d5dbe3;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    margin: 2px 4px 2px 0;
+  }
+
+  .timeline-item { margin-bottom: 26px; }
+  .timeline-item h3 { color: var(--navy); font-size: 1.05rem; }
+  .timeline-item .org { color: var(--teal); font-weight: 600; font-size: 0.95rem; }
+  .timeline-item .dates { color: var(--gray); font-size: 0.85rem; float: right; }
+  .timeline-item ul { margin: 8px 0 0 20px; }
+  .timeline-item li { margin-bottom: 4px; font-size: 0.95rem; }
+
+  .strengths-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+
+  footer {
+    background: var(--navy);
+    color: #dfe6f0;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 20px;
+  }
+  footer a { color: var(--teal); font-weight: 600; }
+  footer p { margin-bottom: 8px; font-size: 0.9rem; }
+
+  @media (max-width: 600px) {
+    .timeline-item .dates { float: none; display: block; margin-top: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mahmoud Abdelaziz</h1>
+  <p class="tagline">Data Analyst | Python, SQL, Tableau | 8+ years in HR, Recruitment, and B2B Sales</p>
+  <p class="blurb">
+    Data analyst transitioning from 8+ years in HR, recruitment, and B2B sales into data analytics.
+    Recently completed an intensive Data Analytics and AI bootcamp, building hands on skill in Python,
+    SQL, Tableau, dbt, and machine learning. Seeking a remote Data Analyst or People Analytics role in
+    Germany, the US, or the UAE.
+  </p>
+  <div class="badges">
+    <a class="badge linkedin" href="https://linkedin.com/in/mahmoud-abdelaziz-mm/" target="_blank">LinkedIn</a>
+    <a class="badge github" href="https://github.com/Simba90m" target="_blank">GitHub</a>
+    <a class="badge tableau" href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank">Tableau Public</a>
+    <a class="badge email" href="mailto:mahmoud.m-1990@hotmail.com">Email</a>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="about">
+  <h2>About</h2>
+  <p>
+    I bring a rare combination for a data analyst: real stakeholder experience translating messy,
+    ambiguous business problems into clear action, now paired with the technical toolkit to do it with
+    data. Across 8+ years in HR, recruitment, and B2B sales I planned workforce needs, managed full
+    cycle recruitment, and grew a client base nearly 5 times over, always relying on data to guide
+    decisions. A recent Data Analytics and AI bootcamp gave me the technical foundation, Python, SQL,
+    Tableau, dbt, and machine learning, to formalize that instinct into repeatable analysis.
+  </p>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">8+</div><div class="label">Years of professional experience</div></div>
+    <div class="stat-card"><div class="num">400+</div><div class="label">Employees recruited</div></div>
+    <div class="stat-card"><div class="num">~5x</div><div class="label">Client base growth</div></div>
+    <div class="stat-card"><div class="num">25%</div><div class="label">Team performance increase</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="label">Data analytics projects</div></div>
+  </div>
+</section>
+
+<section id="toolkit">
+  <h2>Technical Toolkit</h2>
+  <div class="toolkit-grid">
+    <div class="toolkit-item">
+      <h4>Languages and Analysis</h4>
+      <p>Python (Pandas, NumPy), SQL / PostgreSQL, Statistical Analysis (hypothesis testing, A/B testing)</p>
+    </div>
+    <div class="toolkit-item">
+      <h4>Visualization and BI</h4>
+      <p>Tableau Desktop and Public (KPIs, LOD expressions, Sets, dashboards, storytelling), Matplotlib, Seaborn, Excel</p>
+    </div>
+    <div class="toolkit-item">
+      <h4>Data Engineering</h4>
+      <p>dbt (staging to marts modeling), SQLAlchemy, ETL / API pipelines, Git and GitHub</p>
+    </div>
+    <div class="toolkit-item">
+      <h4>Machine Learning</h4>
+      <p>Linear Regression, K Means and DBSCAN Clustering</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Data Analytics Projects</h2>
+
+  <div class="project-card">
+    <h3>Airports, Flights and Weather Dashboard</h3>
+    <div class="tools">Python, Pandas, SQL, Tableau</div>
+    <p class="desc">
+      Analyzed flight delay and cancellation data to identify operational KPIs by route and airline.
+      Built an interactive Tableau dashboard and story to surface the worst performing routes for
+      stakeholders.
+    </p>
+    <div class="links">
+      <a href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank">View on Tableau Public</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <h3>Netflix Content Dashboard</h3>
+    <div class="tools">Tableau</div>
+    <p class="desc">
+      Published an interactive Tableau Public dashboard breaking down Netflix's content library by
+      genre, release trend, and rating, using KPIs, LOD expressions, and Sets.
+    </p>
+    <div class="links">
+      <a href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank">View on Tableau Public</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <h3>Data Modeling with dbt</h3>
+    <div class="tools">dbt, SQL, PostgreSQL</div>
+    <p class="desc">
+      Modeled raw transactional data into reliable, tested staging to marts pipelines across two
+      schemas, shop_smart and northwind. Delivered findings via PowerPoint, PDF, and Jupyter Notebook.
+    </p>
+    <div class="links">
+      <a href="https://github.com/Simba90m/dbt_project_mahmoud" target="_blank">View repository</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <h3>Muesli Sales Analysis</h3>
+    <div class="tools">Python, Pandas, Matplotlib, Seaborn, EDA</div>
+    <p class="desc">
+      Performed exploratory data analysis on sales data to uncover trends driving performance and
+      visualized findings into business ready insights.
+    </p>
+  </div>
+
+  <div class="project-card inprogress">
+    <h3>Premier League Recruitment Capstone, "Worth the Investment"</h3>
+    <div class="tools">Python, SQL, dbt, Tableau</div>
+    <p class="desc">
+      In progress bootcamp capstone. Building a forecasting model and dashboard to identify which
+      players represent the best value relative to injury risk and expected performance.
+    </p>
+    <span class="tag">In Progress</span>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Professional Experience</h2>
+
+  <div class="timeline-item">
+    <span class="dates">06/2024 to 01/2026</span>
+    <h3>HR Business Partner</h3>
+    <div class="org">Gi Group Deutschland GmbH, Remote, Germany</div>
+    <ul>
+      <li>Aligned workforce planning with business goals, contributing to a 25% increase in team performance.</li>
+      <li>Improved organizational restructuring transition success by 85% through close collaboration with senior leadership.</li>
+      <li>Advised managers on employee relations and performance management to strengthen team effectiveness.</li>
+    </ul>
+  </div>
+
+  <div class="timeline-item">
+    <span class="dates">09/2022 to 05/2024</span>
+    <h3>Onsite Recruitment Supervisor</h3>
+    <div class="org">Gi Group Deutschland GmbH, Bremen, Germany</div>
+    <ul>
+      <li>Managed end to end recruitment for a major client, from sourcing and onboarding through offboarding.</li>
+      <li>Created employment contracts and coordinated the full employee lifecycle for smooth, compliant processes.</li>
+      <li>Recruited approximately 250 employees within 6 weeks for a high demand peak season, and approximately 400 employees in total during the role.</li>
+    </ul>
+  </div>
+
+  <div class="timeline-item">
+    <span class="dates">01/2017 to 01/2022</span>
+    <h3>Chemical Sales Engineer</h3>
+    <div class="org">ACC (Aburida for Construction Chemicals), Remote, Egypt</div>
+    <ul>
+      <li>Grew the North Egypt client base from 9 to 43 accounts, nearly 5 times over, while consistently exceeding monthly sales targets of EGP 1M, using data informed pipeline management.</li>
+      <li>Managed end to end B2B sales cycles for construction chemical products, using market insights and performance tracking to support business growth and decision making.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education and Recognition</h2>
+
+  <div class="timeline-item">
+    <span class="dates">2026 to Present</span>
+    <h3>Data Analytics and AI Bootcamp</h3>
+    <div class="org">neuefische GmbH, School and Pool for Digital Talent, Remote, Germany</div>
+    <ul>
+      <li>Intensive full time program covering Python, Pandas, SQL, Tableau, dbt, SQLAlchemy, Git, statistics, and machine learning through hands on project work.</li>
+    </ul>
+  </div>
+
+  <div class="timeline-item">
+    <span class="dates">2010 to 2015</span>
+    <h3>Bachelor of Chemical Engineering</h3>
+    <div class="org">UCSI University, Kuala Lumpur, Malaysia</div>
+    <ul>
+      <li>GPA 3.46 out of 4.0. Coursework strengthened quantitative analysis, problem solving, and process evaluation skills.</li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <h3 style="color: var(--navy); font-size: 1.05rem; margin-bottom: 10px;">Recognition</h3>
+    <div class="strengths-row">
+      <span class="tag">Best Recruiter Award, Gi Group Deutschland (2023)</span>
+      <span class="tag">Cohort Presenter and Team Repo Owner, neuefische Bootcamp (2026)</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <h3 style="color: var(--navy); font-size: 1.05rem; margin-bottom: 10px;">Core Strengths and Languages</h3>
+    <div class="strengths-row">
+      <span class="tag">Analytical Thinking</span>
+      <span class="tag">Problem Solving</span>
+      <span class="tag">Communication</span>
+      <span class="tag">Collaboration</span>
+      <span class="tag">Adaptability</span>
+      <span class="tag">Attention to Detail</span>
+      <span class="tag">Decision Making</span>
+      <span class="tag">English, Proficient</span>
+      <span class="tag">German, B2 Advanced</span>
+      <span class="tag">Arabic, Native</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <p>Bremen, Germany, open to remote roles in the EU, US, and UAE</p>
+  <p>
+    <a href="mailto:mahmoud.m-1990@hotmail.com">mahmoud.m-1990@hotmail.com</a> &middot;
+    <a href="https://linkedin.com/in/mahmoud-abdelaziz-mm/" target="_blank">LinkedIn</a> &middot;
+    <a href="https://github.com/Simba90m" target="_blank">GitHub</a> &middot;
+    <a href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank">Tableau Public</a>
+  </p>
+  <p style="color: var(--gray); margin-top: 16px;">Built and maintained by Mahmoud Abdelaziz</p>
+</footer>
+
+</body>
+</html>
