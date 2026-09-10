@@ -26,8 +26,17 @@
   header {
     background: var(--navy);
     color: #fff;
-    padding: 70px 20px 60px;
+    padding: 56px 20px 60px;
     text-align: center;
+  }
+  header .avatar {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--teal);
+    box-shadow: 0 0 0 6px rgba(15,155,142,0.15);
+    margin-bottom: 22px;
   }
   header h1 { font-size: 2.4rem; margin-bottom: 8px; }
   header p.tagline { color: var(--teal); font-size: 1.15rem; font-weight: 600; margin-bottom: 18px; }
@@ -104,6 +113,15 @@
   .toolkit-item h4 { color: var(--navy); font-size: 0.95rem; margin-bottom: 6px; }
   .toolkit-item p { font-size: 0.88rem; color: var(--text); }
 
+  .icon-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 22px 0 34px;
+  }
+  .icon-strip img { height: 24px; }
+
   .project-card {
     background: #fff;
     border-radius: 12px;
@@ -155,6 +173,7 @@
 <body>
 
 <header>
+  <img class="avatar" src="photo.jpg" alt="Portrait of Mahmoud Abdelaziz">
   <h1>Mahmoud Abdelaziz</h1>
   <p class="tagline">Data Analyst | Python, SQL, Tableau | 8+ years in HR, Recruitment, and B2B Sales</p>
   <p class="blurb">
@@ -203,6 +222,17 @@
 
 <section id="toolkit">
   <h2>Technical Toolkit</h2>
+  <div class="icon-strip">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
+    <img src="https://img.shields.io/badge/SQL%2FPostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="SQL / PostgreSQL">
+    <img src="https://img.shields.io/badge/Tableau-E97627?style=flat-square&logo=tableau&logoColor=white" alt="Tableau">
+    <img src="https://img.shields.io/badge/dbt-FF694B?style=flat-square&logo=dbt&logoColor=white" alt="dbt">
+    <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit">
+    <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+    <img src="https://img.shields.io/badge/GitHub-24292F?style=flat-square&logo=github&logoColor=white" alt="GitHub">
+    <img src="https://img.shields.io/badge/Machine_Learning-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="Machine Learning">
+  </div>
   <div class="toolkit-grid">
     <div class="toolkit-item">
       <h4>Languages and Analysis</h4>
@@ -396,7 +426,7 @@
 </section>
 
 <footer id="contact">
-  <p>Bremen, Germany, open to remote roles in the EU, US, and UAE</p>
+  <p>Bremen, Germany, open to any industry and any location, remote or onsite</p>
   <p>
     <a href="mailto:mahmoud.m-1990@hotmail.com">mahmoud.m-1990@hotmail.com</a> &middot;
     <a href="https://linkedin.com/in/mahmoud-abdelaziz-mm/" target="_blank">LinkedIn</a> &middot;
