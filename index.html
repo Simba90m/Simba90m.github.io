@@ -36,6 +36,7 @@
     --text: #2B2B2B;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: "Segoe UI", Calibri, Arial, sans-serif;
     background: var(--bg);
@@ -44,6 +45,21 @@
   }
   a { color: var(--teal); text-decoration: none; }
   a:hover { text-decoration: underline; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .journey-dot { transform: scale(1); }
+    .journey-line-fill { height: 100% !important; }
+    * { animation: none !important; transition: none !important; }
+  }
 
   header {
     background: var(--navy);
@@ -112,8 +128,13 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background 0.25s, color 0.25s;
   }
-  nav a svg { width: 15px; height: 15px; stroke: var(--teal); flex-shrink: 0; }
+  nav a svg { width: 15px; height: 15px; stroke: var(--teal); flex-shrink: 0; transition: stroke 0.25s; }
+  nav a.active { background: rgba(15,155,142,0.12); color: var(--teal); }
+  nav a.active svg { stroke: var(--magenta); }
 
   section { max-width: 960px; margin: 0 auto; padding: 60px 24px; }
   section h2 {
@@ -303,6 +324,16 @@
     background: #dfe3ea;
     transform: translateX(-50%);
   }
+  .journey-line-fill {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 0%;
+    background: linear-gradient(var(--teal), var(--magenta));
+    transform: translateX(-50%);
+    z-index: 0;
+  }
   .journey-item { position: relative; width: 50%; padding-bottom: 44px; }
   .journey-item.journey-left { left: 0; padding-right: 44px; text-align: right; }
   .journey-item.journey-right { left: 50%; padding-left: 44px; text-align: left; }
@@ -318,7 +349,10 @@
     justify-content: center;
     box-shadow: 0 0 0 5px #f4f6f8;
     z-index: 1;
+    transform: scale(0);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+  .journey-item.is-visible .journey-dot { transform: scale(1); }
   .journey-dot svg { width: 16px; height: 16px; stroke: #fff; }
   .journey-left .journey-dot { right: -17px; }
   .journey-right .journey-dot { left: -17px; }
@@ -353,7 +387,7 @@
   .journey-card p.milestone-desc { font-size: 0.9rem; color: var(--text); }
 
   @media (max-width: 700px) {
-    .journey::before { left: 16px; }
+    .journey::before, .journey-line-fill { left: 16px; }
     .journey-item, .journey-item.journey-left, .journey-item.journey-right {
       width: 100%;
       left: 0;
@@ -461,11 +495,11 @@
     Tableau, dbt, and machine learning, to formalize that instinct into repeatable analysis.
   </p>
   <div class="stats-grid">
-    <div class="stat-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="num">8+</div><div class="label">Years of professional experience</div></div>
-    <div class="stat-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="num">400+</div><div class="label">Employees recruited</div></div>
-    <div class="stat-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="num">~5x</div><div class="label">Client base growth</div></div>
-    <div class="stat-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="num">25%</div><div class="label">Team performance increase</div></div>
-    <div class="stat-card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="num">7</div><div class="label">Data analytics projects</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="num"><span class="count" data-target="8" data-suffix="+">0+</span></div><div class="label">Years of professional experience</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="num"><span class="count" data-target="400" data-suffix="+">0+</span></div><div class="label">Employees recruited</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="num"><span class="count" data-target="5" data-prefix="~" data-suffix="x">~0x</span></div><div class="label">Client base growth</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="num"><span class="count" data-target="25" data-suffix="%">0%</span></div><div class="label">Team performance increase</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="num"><span class="count" data-target="7" data-suffix="">0</span></div><div class="label">Data analytics projects</div></div>
   </div>
 </section>
 
@@ -492,22 +526,22 @@
     <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="Excel">
   </div>
   <div class="toolkit-grid">
-    <div class="toolkit-item">
+    <div class="toolkit-item reveal">
       <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
       <div><h4>Languages and Analysis</h4>
       <p>Python (Pandas, NumPy), SQL / PostgreSQL, Statistical Analysis (hypothesis testing, A/B testing)</p></div>
     </div>
-    <div class="toolkit-item">
+    <div class="toolkit-item reveal">
       <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
       <div><h4>Visualization and BI</h4>
       <p>Tableau Desktop and Public (KPIs, LOD expressions, Sets, dashboards, storytelling), Matplotlib, Seaborn, Excel</p></div>
     </div>
-    <div class="toolkit-item">
+    <div class="toolkit-item reveal">
       <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
       <div><h4>Data Engineering</h4>
       <p>dbt (staging to marts modeling), SQLAlchemy, ETL / API pipelines, Streamlit, Git and GitHub</p></div>
     </div>
-    <div class="toolkit-item">
+    <div class="toolkit-item reveal">
       <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
       <div><h4>Machine Learning</h4>
       <p>Linear Regression, K Means and DBSCAN Clustering</p></div>
@@ -518,7 +552,7 @@
 <section id="projects">
   <h2>Data Analytics Projects</h2>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
     <div class="body">
     <h3>Workforce &amp; HR Analytics Dashboard</h3>
@@ -557,7 +591,7 @@
     </div>
   </div>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: var(--navy);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
     <div class="body">
     <h3>Logistics &amp; Supply Chain Analytics: Atlas Global Logistics</h3>
@@ -596,7 +630,7 @@
     </div>
   </div>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: #3F4F75;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-1 .1-1.3.5l-.7.9c-.4.4-.2 1.1.3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 2.4 5.6c.2.5.9.7 1.3.3l.9-.7c.4-.3.6-.8.5-1.3z"/></svg></div>
     <div class="body">
     <h3>Airports, Flights and Weather Dashboard</h3>
@@ -609,10 +643,31 @@
     <div class="links">
       <a class="action-tableau" href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Tableau Public</a>
     </div>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>A million-plus row flight, airport, and daily weather dataset needed to answer a concrete operational question: which routes, airlines, and conditions actually drive delays and cancellations, not just that they happen.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Joined airports, flights, and weather data in SQL, then built a 9-dashboard connected Tableau story with full navigation: a delay map, airline and airport rankings, a weather impact heatmap, a distance-versus-delay analysis, and a short-term forecast with a confidence band, closing on a key-takeaways summary.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>Delay drivers were not evenly spread: one airline's delays roughly tripled in snow while most others held steady, a different airline actually had the best on-time record overall despite not having the strongest reputation, and delay climbed sharply for flights beyond roughly 3,000 miles.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>Naming the specific airline, distance band, or weather condition behind a delay spike is what turns a dashboard from a status report into something operations and scheduling teams can actually act on, and it is the same instinct for finding the driver behind a number, not just the number itself, that carries over from analytics into any operational role.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: #B4131F;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg></div>
     <div class="body">
     <h3>Netflix Content Dashboard</h3>
@@ -624,10 +679,31 @@
     <div class="links">
       <a class="action-tableau" href="https://public.tableau.com/app/profile/mahmoud.abdelaziz2733/vizzes" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Tableau Public</a>
     </div>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>Netflix's public content catalog is large enough that a simple browse tells you almost nothing about the underlying content strategy: how the mix of genres, release volume, and ratings has actually shifted over time.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Used Tableau's LOD (Level of Detail) expressions and Sets to break the catalog down by genre, release trend, and content rating independently of how the view is filtered, so the KPIs stay accurate whether someone is looking at the whole library or a single genre slice.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>Genre mix and release volume are not static: isolating specific genres and rating bands through Sets shows how the library's composition has moved over time, rather than a single flat snapshot.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>This one is more of a Tableau skills showcase than a business case: LOD expressions and Sets are the tools that keep KPIs correct under filtering, which is exactly what breaks in less careful dashboards and quietly produces wrong numbers stakeholders trust.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: #FF694B;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
     <div class="body">
     <h3>Data Modeling with dbt</h3>
@@ -639,10 +715,31 @@
     <div class="links">
       <a class="action-repo" href="https://github.com/Simba90m/dbt_project_mahmoud" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Repository</a>
     </div>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>Raw transactional tables across two separate schemas, shop_smart and northwind, were not safe to build a dashboard or a business analysis on top of directly: no consistent tests, no documented transformation logic, no single trusted definition of core entities.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Built a staging-to-marts dbt pipeline for each schema, with automated tests guarding data quality at every layer rather than trusting the source tables at face value. Findings and documentation were delivered through PowerPoint, PDF, and a Jupyter Notebook so both technical and non-technical audiences could follow the work.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>This project is less about one headline finding and more about the discipline behind it: a transformation layer that is tested and repeatable is what makes every chart built on top of it trustworthy, instead of a one-off number nobody can reproduce.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>This is the same staging-to-marts, test-first discipline behind both the Workforce and Logistics dashboards elsewhere in this portfolio. It is the unglamorous but essential layer that determines whether a dashboard's numbers can actually be trusted.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
-  <div class="project-card">
+  <div class="project-card reveal">
     <div class="thumb" style="background: var(--magenta);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
     <div class="body">
     <h3>Muesli Sales Analysis</h3>
@@ -651,10 +748,31 @@
       Performed exploratory data analysis on sales data to uncover trends driving performance and
       visualized findings into business ready insights.
     </p>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>A muesli distribution company's delivery and profit performance needed a real diagnosis under a tight deadline: were the delays and margin issues a fluke, or a genuine, repeatable pattern.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Ran exploratory data analysis in Python (Pandas, Matplotlib, Seaborn) against delivery and sales records, and backed the key findings with confidence intervals rather than relying on averages alone, to separate a real effect from ordinary noise.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>Both warehouse processing time and logistics delivery time exceeded their stated targets, and Toasted Muesli's profit margin was confirmed, via non-overlapping confidence intervals, to be substantially lower than the other product categories, not just lower on average by chance.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>Confirming a gap statistically instead of eyeballing an average is the difference between a hunch and a finding a business can actually act on, whether that means renegotiating a target with the warehouse or reviewing pricing on a specific product line.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
-  <div class="project-card inprogress">
+  <div class="project-card inprogress reveal">
     <div class="thumb" style="background: var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h2a2 2 0 0 1 0 4h-1M7 5H5a2 2 0 0 0 0 4h1"/></svg></div>
     <div class="body">
     <h3>Premier League Recruitment Capstone, "Worth the Investment"</h3>
@@ -664,6 +782,27 @@
       players represent the best value relative to injury risk and expected performance.
     </p>
     <span class="tag">In Progress</span>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>Recruitment decisions in football often price a player on reputation and recent form alone. The hypothesis here: players with a rising value trend and high injury or workload risk are systematically overvalued relative to their realistic future output, and that gap is measurable.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Combined three real data sources (Transfermarkt player values, Transfermarkt injury history, and FBref performance stats) into a tested dbt pipeline (staging to marts), then forecast each player's value trend and built a composite injury risk score from injury frequency, recency, and playing load.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Where It Stands</h5>
+          <p>The full pipeline runs end to end against real data for the current Premier League player pool. The honest result so far: the value-forecasting model's directional accuracy underperformed a simple coin flip, traced to it over-extrapolating recent momentum instead of accounting for the aging curve most players actually follow, a specific, diagnosed limitation rather than an unexplained miss. The injury risk score is complete and sanity-checked. Next: combining both signals into the final recruitment view and the Tableau dashboard.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>Reporting a model's real weaknesses, and why they happened, is worth more to an employer than a polished result that hides them. That is the standard I am holding this capstone to.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
@@ -671,14 +810,14 @@
     <h3 style="color: var(--navy); font-size: 1.15rem; margin-bottom: 6px;">Live Streamlit Apps</h3>
     <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 4px;">Companion apps deployed so far, for exploring the data behind each dashboard.</p>
     <div class="app-grid">
-      <a class="app-card" href="https://workforce-analytics-meridiangit-b5pvkjtuuvkafoczkghhhy.streamlit.app/" target="_blank">
+      <a class="app-card reveal" href="https://workforce-analytics-meridiangit-b5pvkjtuuvkafoczkghhhy.streamlit.app/" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <div>
           <strong>Workforce &amp; HR Analytics</strong>
           <span>workforce-analytics-meridiangit.streamlit.app</span>
         </div>
       </a>
-      <a class="app-card" href="https://dashboardapppy-xrvbqn8vmudetwlephtaap.streamlit.app/" target="_blank">
+      <a class="app-card reveal" href="https://dashboardapppy-xrvbqn8vmudetwlephtaap.streamlit.app/" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <div>
           <strong>Atlas Global Logistics</strong>
@@ -698,8 +837,9 @@
   </p>
 
   <div class="journey">
+    <div class="journey-line-fill" id="journeyFill"></div>
 
-    <div class="journey-item journey-left type-education">
+    <div class="journey-item reveal journey-left type-education">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2026 &ndash; Present</span>
@@ -711,7 +851,7 @@
       </div>
     </div>
 
-    <div class="journey-item journey-right type-work">
+    <div class="journey-item reveal journey-right type-work">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2024 &ndash; 2026</span>
@@ -724,7 +864,7 @@
       </div>
     </div>
 
-    <div class="journey-item journey-left type-milestone">
+    <div class="journey-item reveal journey-left type-milestone">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2023</span>
@@ -733,7 +873,7 @@
       </div>
     </div>
 
-    <div class="journey-item journey-right type-work">
+    <div class="journey-item reveal journey-right type-work">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2022 &ndash; 2024</span>
@@ -746,7 +886,7 @@
       </div>
     </div>
 
-    <div class="journey-item journey-left type-work">
+    <div class="journey-item reveal journey-left type-work">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2017 &ndash; 2022</span>
@@ -759,7 +899,7 @@
       </div>
     </div>
 
-    <div class="journey-item journey-right type-education">
+    <div class="journey-item reveal journey-right type-education">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
       <div class="journey-card">
         <span class="journey-date">2010 &ndash; 2015</span>
@@ -810,6 +950,92 @@
     backToTop.classList.toggle('visible', window.scrollY > 500);
   });
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Fade-and-rise reveal for cards, with a light stagger per section
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const counters = new WeakMap();
+    revealEls.forEach(el => {
+      const container = el.closest('.stats-grid, .toolkit-grid, .app-grid, .journey') || el.parentElement;
+      const n = counters.get(container) || 0;
+      el.style.transitionDelay = Math.min(n * 0.07, 0.42) + 's';
+      counters.set(container, n + 1);
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  }
+
+  // Count-up animation for the About stat numbers
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = prefix + target + suffix; return; }
+    const duration = 1100;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => countObserver.observe(el));
+
+  // Highlight the current section in the nav as you scroll
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const trackedSections = document.querySelectorAll('section[id], footer[id]');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+      if (!link) return;
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  trackedSections.forEach(s => navObserver.observe(s));
+
+  // Fill the My Journey timeline as you scroll through it
+  const journeyEl = document.querySelector('.journey');
+  const journeyFill = document.getElementById('journeyFill');
+  function updateJourneyFill() {
+    if (!journeyEl || !journeyFill || reduceMotion) return;
+    const rect = journeyEl.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const progressed = (vh * 0.5) - rect.top;
+    const pct = Math.max(0, Math.min(1, progressed / rect.height));
+    journeyFill.style.height = (pct * 100) + '%';
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateJourneyFill(); ticking = false; });
+      ticking = true;
+    }
+  });
+  window.addEventListener('resize', updateJourneyFill);
+  updateJourneyFill();
 </script>
 
 </body>
