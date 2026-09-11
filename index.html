@@ -21,6 +21,10 @@
 <meta name="twitter:title" content="Mahmoud Abdelaziz | Data Analyst">
 <meta name="twitter:description" content="Data Analyst portfolio: Python, SQL, Tableau, and dbt projects, built on 8+ years of HR, recruitment, and B2B sales experience.">
 <meta name="twitter:image" content="https://simba90m.github.io/og-image.png">
+
+<!-- Privacy-friendly analytics (GoatCounter: no cookies, no personal data collected, free, GDPR-friendly). -->
+<script data-goatcounter="https://simba90m.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
 <style>
   :root {
     --navy: #0B1F3F;
@@ -215,6 +219,43 @@
   .project-card .links a.action-tableau { background: #E97627; }
   .project-card .links a.action-streamlit { background: #FF4B4B; }
   .project-card .links a.action-repo { background: #24292F; }
+
+  .case-study { margin-top: 14px; }
+  .case-study summary {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.84rem;
+    color: var(--navy);
+    list-style: none;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--navy);
+  }
+  .case-study summary::-webkit-details-marker { display: none; }
+  .case-study summary svg { width: 13px; height: 13px; stroke: var(--navy); transition: transform 0.2s; flex-shrink: 0; }
+  .case-study[open] summary svg { transform: rotate(180deg); }
+  .case-study summary:hover { background: var(--bg); }
+  .case-study .cs-body {
+    margin-top: 16px;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--teal);
+  }
+  .case-study .cs-block { margin-bottom: 14px; }
+  .case-study .cs-block:last-child { margin-bottom: 0; }
+  .case-study .cs-block h5 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 5px;
+  }
+  .case-study .cs-block p { font-size: 0.92rem; margin: 0; }
 
   .app-grid {
     display: grid;
@@ -492,6 +533,27 @@
       <a class="action-streamlit" href="https://workforce-analytics-meridiangit-b5pvkjtuuvkafoczkghhhy.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Streamlit App</a>
       <a class="action-repo" href="https://github.com/Simba90m/workforce-analytics-meridian" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Repository</a>
     </div>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>A mid-size company's HR data lived in fragments across systems: headcount here, exits there, hiring timelines somewhere else, with no single view stakeholders could act on. Leaders could see that people were leaving but not where, when in their tenure, or whether hiring itself was keeping pace.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Modeled synthetic HR data through a dbt pipeline (staging to marts, with tests) into a clean dimensional structure connecting employees, departments, hires, and exits. Built an interactive Tableau dashboard around it: a stacked area chart for headcount trends, a heatmap of attrition by department and tenure band, a lollipop chart comparing time-to-fill by role, and cross-chart filter and highlighter actions so a stakeholder can isolate any department in one click. A Streamlit companion app lets anyone explore the underlying data directly.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>Early-tenure attrition concentrated heavily in operations roles, disproportionate to their share of headcount, while technical roles took noticeably longer to fill than non-technical ones.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>That combination points to a concrete action: a targeted first-90-days retention effort for at-risk roles, and shifting recruiter capacity toward the slower-filling requisitions rather than spreading it evenly. It is the same kind of trade-off I used to make by instinct and a spreadsheet during 8 years in HR and recruitment, now backed by a dashboard the whole team can check anytime instead of a one-off pull.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
@@ -510,6 +572,27 @@
       <a class="action-streamlit" href="https://dashboardapppy-xrvbqn8vmudetwlephtaap.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Streamlit App</a>
       <a class="action-repo" href="https://github.com/Simba90m/logistics-supply-chain-atlas" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Repository</a>
     </div>
+    <details class="case-study">
+      <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <div class="cs-body">
+        <div class="cs-block">
+          <h5>The Problem</h5>
+          <p>Atlas Global Logistics (a fictional logistics company built for this project) needed visibility into shipment performance and warehouse network efficiency across regions, so operations teams could catch bottlenecks before they turned into missed delivery SLAs, rather than finding out from a customer complaint.</p>
+        </div>
+        <div class="cs-block">
+          <h5>The Approach</h5>
+          <p>Built a dbt pipeline, backed by 34 passing tests, modeling shipments, warehouses, carriers, and routes into reliable marts. The Tableau dashboard centers on a real geographic map of the warehouse network alongside a KPI row (on-time delivery rate, average transit time, cost per shipment), with cross-chart filter and highlight actions linking the map straight through to route- and carrier-level detail. A Streamlit companion app supports ad hoc digging into the raw data.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Key Insight</h5>
+          <p>The network-wide on-time delivery average looked healthy, but it was masking a sharp drop concentrated in a small number of carrier-route combinations within one region.</p>
+        </div>
+        <div class="cs-block">
+          <h5>Why It Matters</h5>
+          <p>Surfacing the specific carrier and region behind the problem, instead of a single blended number, is what lets an operations team actually act: renegotiate with that carrier or reroute volume away from it, protecting delivery SLAs before they slip further. That is the operational trade-off thinking that matters most in supply chain and logistics analytics roles.</p>
+        </div>
+      </div>
+    </details>
     </div>
   </div>
 
