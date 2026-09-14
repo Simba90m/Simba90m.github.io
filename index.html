@@ -495,7 +495,7 @@
     Tableau, dbt, and machine learning, to formalize that instinct into repeatable analysis.
   </p>
   <div class="stats-grid">
-    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="num"><span class="count" data-target="8" data-suffix="+">0+</span></div><div class="label">Years of professional experience</div></div>
+    <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="num"><span class="count" data-target="8" data-suffix="+">0+</span></div><div class="label">Years in HR, Recruitment &amp; Sales</div></div>
     <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="num"><span class="count" data-target="400" data-suffix="+">0+</span></div><div class="label">Employees recruited</div></div>
     <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="num"><span class="count" data-target="5" data-prefix="~" data-suffix="x">~0x</span></div><div class="label">Client base growth</div></div>
     <div class="stat-card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="num"><span class="count" data-target="25" data-suffix="%">0%</span></div><div class="label">Team performance increase</div></div>
@@ -552,7 +552,7 @@
 <section id="projects">
   <h2>Data Analytics Projects</h2>
 
-  <div class="project-card reveal">
+  <div class="project-card reveal" data-category="hr">
     <div class="thumb" style="background: var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
     <div class="body">
     <h3>Workforce &amp; HR Analytics Dashboard</h3>
@@ -591,7 +591,7 @@
     </div>
   </div>
 
-  <div class="project-card reveal">
+  <div class="project-card reveal" data-category="logistics">
     <div class="thumb" style="background: var(--navy);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
     <div class="body">
     <h3>Logistics &amp; Supply Chain Analytics: Atlas Global Logistics</h3>
@@ -629,7 +629,7 @@
     </details>
     </div>
   </div>
-    <div class="project-card reveal">
+    <div class="project-card reveal" data-category="hr">
     <div class="thumb" style="background: var(--magenta);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
     <div class="body">
     <h3>Tech Interview Outcomes</h3>
@@ -810,7 +810,7 @@
     </div>
   </div>
 
-  <div class="project-card inprogress reveal">
+  <div class="project-card inprogress reveal" data-category="sports">
     <div class="thumb" style="background: var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h2a2 2 0 0 1 0 4h-1M7 5H5a2 2 0 0 0 0 4h1"/></svg></div>
     <div class="body">
     <h3>Premier League Recruitment Capstone, "Worth the Investment"</h3>
@@ -997,6 +997,43 @@
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Show the most relevant project first when the visit context suggests one.
+  // Signal 1: a ?ref= link (e.g. a link shared in a sports- or HR-focused
+  // application) beats signal 2: the referring site's domain, when both are present.
+  function getProjectPriorityCategory() {
+    const categoryKeywords = {
+      sports: ['sport', 'football', 'soccer', 'premierleague', 'bundesliga', 'fifa', 'uefa'],
+      hr: ['hr', 'recruit', 'talent', 'people', 'staffing', 'linkedin', 'xing', 'stepstone', 'indeed'],
+      logistics: ['logistic', 'supplychain', 'supply-chain', 'freight', 'warehouse']
+    };
+    function matchCategory(text) {
+      if (!text) return null;
+      const lower = text.toLowerCase();
+      for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        if (keywords.some(k => lower.includes(k))) return category;
+      }
+      return null;
+    }
+    const refParam = new URLSearchParams(window.location.search).get('ref');
+    return matchCategory(refParam) || matchCategory(document.referrer);
+  }
+
+  (function applyProjectPriority() {
+    const category = getProjectPriorityCategory();
+    if (!category) return;
+    const projectsSection = document.getElementById('projects');
+    if (!projectsSection) return;
+    const matchingCards = Array.from(projectsSection.querySelectorAll('.project-card'))
+      .filter(card => card.dataset.category === category);
+    if (!matchingCards.length) return;
+    const heading = projectsSection.querySelector('h2');
+    const note = document.createElement('p');
+    note.style.cssText = 'color: var(--gray); font-size: 0.9rem; margin: -6px 0 20px;';
+    note.textContent = 'Showing the projects most relevant to you first.';
+    heading.insertAdjacentElement('afterend', note);
+    matchingCards.reverse().forEach(card => note.insertAdjacentElement('afterend', card));
+  })();
 
   // Fade-and-rise reveal for cards, with a light stagger per section
   const revealEls = document.querySelectorAll('.reveal');
