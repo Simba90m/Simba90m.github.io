@@ -674,17 +674,17 @@
     </div>
   </div>
 
-  <div class="project-card inprogress reveal" data-category="sports">
+  <div class="project-card reveal" data-category="sports">
     <div class="thumb" style="background: var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h2a2 2 0 0 1 0 4h-1M7 5H5a2 2 0 0 0 0 4h1"/></svg></div>
     <div class="body">
     <span class="proj-eyebrow featured">Sports Analytics &mdash; Featured</span>
-    <h3>Premier League Recruitment Capstone, "Worth the Investment"</h3>
+    <h3>Worth the Investment? Premier League Recruitment Capstone</h3>
     <div class="tools">Python, SQL, dbt, Tableau</div>
     <p class="desc">
       <strong>Business question:</strong> which players represent the best value relative to injury risk
       and expected performance? <strong>Approach:</strong> Python &rarr; SQL &rarr; dbt &rarr; Tableau.
     </p>
-    <span class="tag">In Progress &mdash; Capstone Project</span>
+    <span class="tag">Final Bootcamp Capstone &mdash; Presented Sept 2026</span>
     <details class="case-study">
       <summary>Read the case study<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
       <div class="cs-body">
@@ -694,15 +694,15 @@
         </div>
         <div class="cs-block">
           <h5>The Approach</h5>
-          <p>Combined three real data sources (Transfermarkt player values, Transfermarkt injury history, and FBref performance stats) into a tested dbt pipeline (staging to marts), then forecast each player's value trend and built a composite injury risk score from injury frequency, recency, and playing load.</p>
+          <p>Combined three real data sources (Transfermarkt player values, Transfermarkt injury history, and FBref performance stats) into a tested dbt pipeline (staging to marts), covering 1,959 Premier League players. Tested three separate hypotheses for three different stakeholders: Recruitment/Scouting, Sporting Directors, and Medical/Performance.</p>
         </div>
         <div class="cs-block">
-          <h5>Where It Stands</h5>
-          <p>The full pipeline runs end to end against real data for the current Premier League player pool. The honest result so far: the value-forecasting model's directional accuracy underperformed a simple coin flip, traced to it over-extrapolating recent momentum instead of accounting for the aging curve most players actually follow, a specific, diagnosed limitation rather than an unexplained miss. The injury risk score is complete and sanity-checked. Next: combining both signals into the final recruitment view and the Tableau dashboard.</p>
+          <h5>The Result</h5>
+          <p>Mixed, and reported that way rather than smoothed over. The value-forecasting model failed its own backtest: only 22.7% directional accuracy on 150 held-out players, worse than a coin flip, biased toward predicting "rising" almost regardless of ground truth. What did hold up: players with any injury history showed 0% median value growth versus +4.35% for players with none, a cleaner and more honest recruitment signal than the forecast itself. Position was not a statistically significant predictor of injury risk (p = 0.61).</p>
         </div>
         <div class="cs-block">
           <h5>Why It Matters</h5>
-          <p>Reporting a model's real weaknesses, and why they happened, is worth more to an employer than a polished result that hides them. That is the standard I am holding this capstone to.</p>
+          <p>Reporting a model's real weaknesses, and why they happened, is worth more to an employer than a polished result that hides them. That is the standard I held this capstone to, and it is why the negative result is on this page instead of edited out.</p>
         </div>
       </div>
     </details>
@@ -948,11 +948,12 @@
     <div class="journey-item reveal journey-left type-education">
       <div class="journey-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
       <div class="journey-card">
-        <span class="journey-date">2026 &ndash; Present</span>
+        <span class="journey-date">2026</span>
         <h3>Data Analytics and AI Bootcamp</h3>
         <div class="org">neuefische GmbH, School and Pool for Digital Talent, Remote, Germany</div>
         <ul>
           <li>Intensive full time program covering Python, Pandas, SQL, Tableau, dbt, SQLAlchemy, Git, statistics, and machine learning through hands on project work.</li>
+          <li>Graduated September 2026, presenting the "Worth the Investment" Premier League recruitment capstone as the final project.</li>
         </ul>
       </div>
     </div>
